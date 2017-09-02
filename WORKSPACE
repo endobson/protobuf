@@ -51,3 +51,8 @@ bind(
     name = "gson",
     actual = "@gson_maven//jar",
 )
+
+local_repository(
+   name = "com_google_protobuf",
+   path = "."
+)

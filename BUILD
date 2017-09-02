@@ -248,6 +248,22 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+#COPIED_WELL_KNOWN_PROTOS = ["python/" + s for s in RELATIVE_WELL_KNOWN_PROTOS]
+
+[
+genrule(
+  name = "gen_" + proto,
+  outs = [proto],
+  srcs = [":src/" + proto],
+  cmd = "cp $< $@",
+) for proto in RELATIVE_WELL_KNOWN_PROTOS]
+
+proto_library(
+  name = "well_known_types_protos",
+  srcs = RELATIVE_WELL_KNOWN_PROTOS,
+  visibility = ["//visibility:public"],
+)
+
 cc_proto_library(
     name = "cc_wkt_protos",
     srcs = WELL_KNOWN_PROTOS,
